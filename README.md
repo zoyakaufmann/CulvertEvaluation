@@ -1,4 +1,4 @@
-# Scripts_2.15.17
+# Culvert Evaluation
 This is the code used to analyse flood risk for stream crossings based on data collected for culverts across NY state.
 
 How to use Cornell_Culvert_Evaluation.py
