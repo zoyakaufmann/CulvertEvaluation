@@ -22,7 +22,7 @@ if raw_data[L_rd-4:]!='.csv':
 ws_name=raw_input("Enter watershed abbreviation:")
 data_type=raw_input("Fulcrum data or NAACC data? (Enter F for Fulcrum, N for NAACC):")
 
-#Make sure they can't input anything but F or N
+#Make sure they cannot input anything but F or N
 while data_type !='f' and data_type != 'F' and data_type !='n' and data_type !='N':
     data_type=raw_input('Please enter either F for Fulcrum or N for NAACC:')
 
