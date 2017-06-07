@@ -39,10 +39,10 @@ import numpy, os, re, csv
 
 f_out = open(output, 'wb') #opens output file for extracted culverts for writing in binary mode 
 not_extracted_out= open(not_extracted, 'wb') #opens output for crossings not extracted for writing in binary mode
-writer = csv.writer(f_out) #write object
-writer_no_extract=csv.writer(not_extracted_out)
+writer = csv.writer(f_out) # returns writer object from output
+writer_no_extract=csv.writer(not_extracted_out) #returns writer object from non-extracted-data output
 
-#write headings
+#writes the specified headings along a row for the extracted and excluded data
 writer.writerow(['BarrierID','NAACC_ID','Lat','Long','Rd_Name','Culv_Mat','In_Type','In_Shape','In_A','In_B','HW','Slope','Length','Out_Shape','Out_A','Out_B','Comments','Flags']) #header row
 writer_no_extract.writerow(['Survey_ID','NAACC_ID','Lat','Long','Rd_Name','Culv_Mat','In_Type','In_Shape','In_A','In_B','HW','Slope','Length','Out_Shape','Out_A','Out_B','Comments','Flags']) #header row
 
@@ -55,11 +55,11 @@ with open(raw_data, 'r') as f:
     input_table = csv.reader(f)
     next(f) # skip header
     k=1
-    if data_type=='F'or data_type=='f':
-        for row in input_table: #each culvert 
+    if data_type=='F'or data_type=='f': #if the data is fulcrum type
+        for row in input_table: #running through each row, i.e. each culvert 
             
-                
-                Fulcrum_ID=row[15]
+                #naming specific columns in each row
+                Fulcrum_ID=row[15] #eg: column 15 in each row represents fulcrum ID
                 Lat=float(row[11])
                 Long=float(row[12])
                 Road_Name=row[16]
@@ -89,7 +89,7 @@ with open(raw_data, 'r') as f:
                 Fulcrum_ID
                 Flags=0
 
-                if Inlet_A<0:
+                if Inlet_A<0:  #
                     next(f)
                 elif Inlet_B<0:
                     next(f)
