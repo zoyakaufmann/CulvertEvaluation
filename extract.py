@@ -2,6 +2,8 @@
 # David Gold
 # August, 14 2015
 #
+# Comments added by Tanvi Naidu (June 7th 2017)
+#
 # Bridges section fixed by Zoya Kaufmann 1/23/17
 #
 # Updated by Lisa Watkins 9/23/16
@@ -15,24 +17,28 @@
 #
 # Outputs: Culvert script input
 
-raw_data=raw_input("Enter name of raw data file:")
-L_rd=len(raw_data)
-if raw_data[L_rd-4:]!='.csv':
-    raw_data=raw_data+'.csv'   
-ws_name=raw_input("Enter watershed abbreviation:")
-data_type=raw_input("Fulcrum data or NAACC data? (Enter F for Fulcrum, N for NAACC):")
+raw_data=raw_input("Enter name of raw data file:") #prompts user to enter file name
+L_rd=len(raw_data)                              
+if raw_data[L_rd-4:]!='.csv': #corrects entered file name to end with '.csv' if it doesn't already 
+    raw_data=raw_data+'.csv'  #end with '.csv' 
+ws_name=raw_input("Enter watershed abbreviation:") #prompts user to enter three-letter watershed abbreviation
+data_type=raw_input("Fulcrum data or NAACC data? (Enter F for Fulcrum, N for NAACC):") 
+#prompts user to enter F or N based on type of data input
 
-#Make sure they cannot input anything but F or N
+#Makes sure the user cannot input anything but capital or lower-case F or N by displaying the prompt 
+#again if anything else is entered
 while data_type !='f' and data_type != 'F' and data_type !='n' and data_type !='N':
     data_type=raw_input('Please enter either F for Fulcrum or N for NAACC:')
 
+# Saves the output files as the 3-letter watershed abbreviation followed by the specified suffix
 output=ws_name+"_field_data.csv"
 not_extracted=ws_name+"_not_extracted.csv"
-    
+
+# imports required packages and modules to extract the data
 import numpy, os, re, csv
 
-f_out = open(output, 'wb') #output file for extracted culverts
-not_extracted_out= open(not_extracted, 'wb') #output for crossings not extracted
+f_out = open(output, 'wb') #opens output file for extracted culverts for writing in binary mode 
+not_extracted_out= open(not_extracted, 'wb') #opens output for crossings not extracted for writing in binary mode
 writer = csv.writer(f_out) #write object
 writer_no_extract=csv.writer(not_extracted_out)
 
