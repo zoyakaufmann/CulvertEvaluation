@@ -88,10 +88,11 @@ with open(raw_data, 'r') as f:
                 Comments=row[39]
                 Fulcrum_ID
                 Flags=0
-
-                if Inlet_A<0:  #
+                
+                # skipping rows if certain values are 0 or negligible
+                if Inlet_A<0:  #skip in inlet width=0
                     next(f)
-                elif Inlet_B<0:
+                elif Inlet_B<0: #skip if inlet height= 0
                     next(f)
                 elif HW<0:
                     next(f)
