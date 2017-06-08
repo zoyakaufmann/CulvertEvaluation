@@ -118,7 +118,7 @@ with open(raw_data, 'r') as f:
 
             BarrierID=str(k)+ws_name #setting barrier id as the number followed by watershed name
             
-            #assigning names to the differe columns (same for each row)
+            #assigning names to the different columns (same for each row)
             Survey_ID=CD[0] 
             NAACC_ID=CD[35]
             Lat=float(CD[20])
