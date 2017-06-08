@@ -78,7 +78,7 @@ with open(raw_data, 'r') as f:
                 Inlet_type=row[19]
                 Inlet_Shape=row[22]               
                 Inlet_A=float(row[23])
-                Inlet_B=float(row[24])
+                 Inlet_B=float(row[24])
                 HW=float(row[25])
                 Slope=float(row[26])
                 Length=float(row[27])
@@ -101,13 +101,13 @@ with open(raw_data, 'r') as f:
                 elif Length <1:
                     next(f)
 
-                BarrierID=str(k)+ws_name
+                BarrierID=str(k)+ws_name #coerces data into string with number and watershed name
                 k=k+1     
                 writer.writerow([BarrierID, Fulcrum_ID, Lat, Long, Road_Name, Culv_material, Inlet_type, Inlet_Shape, Inlet_A, Inlet_B, HW, Slope,Length, Outlet_shape, Outlet_A, Outlet_B, Comments])
                            
-    elif data_type=='N'or data_type=='n':
+    elif data_type=='N'or data_type=='n':# otherwise, if data is of NAACC type (as opposed to fulcrum)
         NAACC_ID="1"   
-        for row in input_table: #each culvert
+        for row in input_table: #running through each culvert
 
             # eliminate blank cells from data and add data to array
             for i in range(0,67): 
@@ -116,8 +116,10 @@ with open(raw_data, 'r') as f:
                     cell_value=-1
                 CD[i]=cell_value # add field data to array
 
-            BarrierID=str(k)+ws_name
-            Survey_ID=CD[0]
+            BarrierID=str(k)+ws_name #setting barrier id as the number followed by watershed name
+            
+            #assigning names to the differe columns (same for each row)
+            Survey_ID=CD[0] 
             NAACC_ID=CD[35]
             Lat=float(CD[20])
             Long=float(CD[19])
@@ -146,7 +148,7 @@ with open(raw_data, 'r') as f:
             elif Inlet_Shape=='Open Bottom Arch Bridge/Culvert':
                 Inlet_Shape='Arch'
             
-            Inlet_A=float(CD[47])
+            Inlet_A=float(CD[47]) 
             Inlet_B=float(CD[43])
             HW=float(CD[27]) #This is from the top of the culvert, make sure the next step adds the culvert height
             Slope=float(CD[61]) 
@@ -200,9 +202,10 @@ f.close()
 f_out.close()
 not_extracted_out.close()
 
-file_out_path=os.path.dirname(os.path.abspath(output))+'\\' + output
-no_extract_out_path=os.path.dirname(os.path.abspath(not_extracted))+'\\' + not_extracted
+file_out_path=os.path.dirname(os.path.abspath(output))+'\\' + output #sets the directory and name of the output file
+no_extract_out_path=os.path.dirname(os.path.abspath(not_extracted))+'\\' + not_extracted #sets the directory and name of the file containing data not extracted
 
+#displays a message to the user indicating completion of extraction and the locations of the output files
 print '\nExtraction complete! Exctracted values can be found here:\n'
 print file_out_path
 print 'Crossings excluded from analysis can be found here:\n'
