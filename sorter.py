@@ -48,6 +48,7 @@ def sort(ws_data, ID, field_data, output_filename):
     for i in range(0,len(ws_sorted)):
         ws_sorted[i][0]=str(ws_sorted[i][0])+ID
 
+    #Need to fix following section
     F=[] #Empty array for flags
     # Import field data to get flags
     with open(field_data, 'r') as j:
